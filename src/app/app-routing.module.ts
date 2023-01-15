@@ -8,13 +8,10 @@ import { UserComponent } from './components/user/user.component';
 
 
 const routes: Routes = [
-  { path: "", redirectTo: "user", pathMatch: "full" },
+  {path: "", redirectTo : "user",  pathMatch: "full"},
   { path: "user", component: UserComponent, children : [
-    { path: '', component: NavComponent, outlet: "nav"},
-    { path: '', component: LoginComponent},
-    { path: 'signup', component: SignupComponent},
     { path: 'login', component: LoginComponent},
-    //{ path: '', component: LoginComponent, outlet: "body"}
+    { path: 'signup', component: SignupComponent}
   ]}
 ]
 
@@ -22,5 +19,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 
 export class AppRoutingModule { }

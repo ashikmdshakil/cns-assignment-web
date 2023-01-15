@@ -19,8 +19,12 @@ export class NavComponent implements OnInit{
   }
 
 
-  // login(){
-  //   this.router.navigateByUrl("login");
-  // }
+   login(){
+     this.router.navigateByUrl("/user/login");
+   }
+
+   signup(){
+    this.router.navigateByUrl("/user/signup)");
+  }
 
 }
