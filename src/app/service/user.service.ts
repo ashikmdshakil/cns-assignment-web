@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +17,22 @@ export class UserService {
 
    private handleError(error: HttpErrorResponse) {
     if (error.status === 401) {
-      /* Swal.fire({
+       Swal.fire({
         icon: 'error',
         title: 'Your are not authorized.',
         showConfirmButton: false,
         timer: 1800
 
-      }) */
+      }) 
     }
     else {
-      /* Swal.fire({
+      Swal.fire({
         icon: 'error',
         title: 'Something went wrong',
         showConfirmButton: false,
         timer: 1800
 
-      }) */
+      })
     }
     return throwError(new Error(""));
   }
