@@ -2,9 +2,54 @@
     <div class="col-lg-5"></div>
     <div class="col-lg-2">
         <!-- Create new project -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">New Project</button>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create New Project</button>
     </div>
     <div class="col-lg-5"></div>
+  </div>
+
+
+  <div class="row" style="margin-top: 50px;">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-7">
+      <div class="container">
+        <h2>Projects you own.</h2>
+        <p>You are the owner of these following projects:</p>            
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Intro</th>
+              <th>Starting Date</th>
+              <th>Dead Line</th>
+              <th>Status</th>
+              <th>Members</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let project of projects">
+              <td>{{project.name}}</td>
+              <td>{{project.intro}}</td>
+              <td>{{project.startDateTime | date:'short'}}</td>
+              <td>{{project.endDateTime | date:'short'}}</td>
+              <td *ngIf="project.status==0">Pre</td>
+              <td *ngIf="project.status==1">Start</td>
+              <td *ngIf="project.status==3">End</td>
+              <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myMembers">{{project.projectMembers.length}}</button></td>
+              <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myDetails">See Details/Update</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+
+
+
+
+
+
 
 
 
@@ -73,4 +118,49 @@
       
         </div>
       </div>
-</div>
+
+
+
+
+
+      <div id="myDetails" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Project Details</h4>
+            </div>
+            <div class="modal-body">
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+
+
+
+      <div id="myMembers" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Project members</h4>
+            </div>
+            <div class="modal-body">
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>

@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit{
   project: Project = new Project();
   projectService: ProjectService;
   router: Router;
+  projects: Project[] = [];
 
 
 
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(): void {
     this.projectService.getProjects().subscribe(result =>{
-      console.log(result);
+      this.projects = result;
     })
   }
 
