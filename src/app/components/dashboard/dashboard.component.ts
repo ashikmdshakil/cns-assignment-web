@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit{
 
   createProject(){
     this.projectService.createProject(this.project).subscribe(result =>{
+      console.log(result);
       if(result == 'success'){
         Swal.fire({
           title: 'Success!',
