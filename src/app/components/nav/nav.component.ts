@@ -11,7 +11,7 @@ export class NavComponent implements OnInit{
   router: Router;
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
 
   constructor(router: Router){

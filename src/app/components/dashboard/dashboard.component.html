@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="margin-top: 55px;">
     <div class="col-lg-5"></div>
     <div class="col-lg-2">
         <!-- Create new project -->
@@ -24,6 +24,7 @@
               <th>Status</th>
               <th>Members</th>
               <th>Details</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +38,7 @@
               <td *ngIf="project.status==3">End</td>
               <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myMembers">{{project.projectMembers.length}}</button></td>
               <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myDetails">See Details/Update</button></td>
+              <td><button type="button" class="btn btn-link" >Delete</button></td>
             </tr>
           </tbody>
         </table>
