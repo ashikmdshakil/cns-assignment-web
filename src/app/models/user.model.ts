@@ -8,4 +8,5 @@ export class User{
     password: string = "";
     projects: [] = [];
     role: Role = new Role();
+    JWTToken: string = "";
 }

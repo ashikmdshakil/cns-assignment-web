@@ -1,17 +1,13 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
-import { Credential } from '../models/Credential.model';
 import { Project } from '../models/Project.model';
-import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  ipAdress: string = "127.0.0.1:8080/";
-
+export class ProjectService {
   httpClient: HttpClient;
 
   constructor(httpClient: HttpClient) {
@@ -40,19 +36,18 @@ export class UserService {
     return throwError(new Error(""));
   }
 
-   authenticateUser(credential: Credential): Observable<any> {
+  createProject(project: Project): Observable<any> {
+    let token = localStorage.getItem("token")
     const headers = new HttpHeaders({
-      authorization: 'Basic ' + btoa(credential.name + ':' + credential.password)
+      authorization: 'Bearer ' + token
     });
-
-    return this.httpClient.get('http://localhost:8080/public/authenticateUser', { headers: headers })
-      .pipe(
-        catchError(this.handleError)
-      )
+    return this.httpClient.post('http://localhost:8080/private/project/create', project, { responseType: 'text', headers: headers });
   }
 
-  registerUser(user: User): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/public/registerUser', user, { 'responseType': 'text' });
+  getProjects(): Observable<any> {
+    let token = localStorage.getItem("token")
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer '+token);
+    return this.httpClient.get('http://localhost:8080/private/project/owner', { 'headers': headers });
   }
-
 }

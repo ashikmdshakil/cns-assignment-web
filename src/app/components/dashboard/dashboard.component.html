@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-lg-5"></div>
+    <div class="col-lg-2">
+        <!-- Create new project -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">New Project</button>
+    </div>
+    <div class="col-lg-5"></div>
+
+
+
+    <!-- Create new project modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Create new project</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-lg-1"></div>
+                  <div class="col-lg-10">
+                    <div class="form-group">
+                        <label for="usr">Project name:</label>
+                        <input type="text"  [(ngModel)]="project.name" class="form-control" id="usr">
+                      </div>
+                      <div class="form-group">
+                        <label for="comment">Introduction:</label>
+                        <textarea  [(ngModel)]="project.intro" class="form-control" rows="5" id="comment"></textarea>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                            <form action="/action_page.php">
+                                <label for="birthday">Start Date:</label>
+                                <input type="date"  [(ngModel)]="project.startDateTime" id="start_date" name="start_date">
+                            </form>
+                        </div>
+                        <div class="col-lg-6">
+                            <form action="/action_page.php">
+                                <label for="birthday">End Date:</label>
+                                <input type="date"  [(ngModel)]="project. endDateTime"  id="end_date" name="end_date">
+                              </form>
+                        </div>
+                      </div>
+                      <div style="margin-top: 15px;">
+                      <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Project status
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">HTML</a></li>
+                          <li><a href="#">CSS</a></li>
+                          <li><a href="#">JavaScript</a></li>
+                        </ul>
+                      </div>
+                      </div>
+                      <div class="row" style="margin-top: 25px;">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <button type="button" (click)=" createProject()" class="btn btn-success">Create Project</button>
+                            </div>
+                            <div class="col-lg-4"></div>
+                      </div>
+                  </div>
+                  <div class="col-lg-1"></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+</div>

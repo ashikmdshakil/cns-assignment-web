@@ -10,16 +10,16 @@
             </div>
             <div class="form-group">
                 <label for="usr">Name:</label>
-                <input type="text" class="form-control" id="usr">
+                <input type="text"  [(ngModel)]="credential.name" class="form-control" id="usr">
               </div>
               <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
+                <input type="password"  [(ngModel)]="credential.password" class="form-control" id="pwd">
               </div>
               <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
-                    <button type="button" class="btn btn-primary">Sign In</button>
+                    <button type="button" (click)="login()" class="btn btn-primary">Sign In</button>
                 </div>
                 <div class="col-lg-4"></div>
             </div>
