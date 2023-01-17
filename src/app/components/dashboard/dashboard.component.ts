@@ -139,13 +139,38 @@ export class DashboardComponent implements OnInit{
 
   createProject(){
     this.projectService.createProject(this.project).subscribe(result =>{
-      console.log(result);
       if(result == 'success'){
         Swal.fire({
           title: 'Success!',
           text: 'You are successfully registered.',
           icon: 'success',
           confirmButtonText: 'OK'
+        })
+        this.projectService.getProjects().subscribe(result =>{
+          this.projects = result;
+        })
+      }
+      else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
+      }
+    })
+  }
+
+  removeProject(id: number){
+    this.projectService.removeProject(id).subscribe(result =>{
+      if(result == 'success'){
+        Swal.fire({
+          title: 'Success!',
+          text: 'You are successfully registered.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+        this.projectService.getProjects().subscribe(result =>{
+          this.projects = result;
         })
       }
       else{

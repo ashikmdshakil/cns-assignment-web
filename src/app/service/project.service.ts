@@ -97,6 +97,20 @@ export class ProjectService {
     );
   }
 
+  removeProject(id: number): Observable<any> {
+    let token = localStorage.getItem("token")
+    const headers = new HttpHeaders({
+      authorization: 'Bearer ' + token
+    });
+    let formData = new FormData();
+    formData.append("id", id.toString());
+   
+    return this.httpClient.post('http://localhost:8080/private/project/delete', formData, { responseType: 'text', headers: headers })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getProjects(): Observable<any> {
     let token = localStorage.getItem("token")
     let headers = new HttpHeaders();
