@@ -49,9 +49,20 @@
                     </form>
               </div>
               <div class="col-lg-2">
+                <div class="dropdown" style="margin-top: 18px;">
+                  <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Select Status
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a (click)="setStatus(0)">Pre</a></li>
+                    <li><a (click)="setStatus(1)">Start</a></li>
+                    <li><a (click)="setStatus(3)">End</a></li>
+                  </ul>
+                </div>
+            </div>
+              <div class="col-lg-2">
                 <button type="button" (click)="search()" class="btn btn-primary" style="margin-top: 18px;">Search</button>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
 
             </div>
             </div>

@@ -58,5 +58,9 @@ export class ReportComponent implements OnInit{
     })
   }
 
+  setStatus(number: number){
+    this.status = number;
+  }
+
 
 }
