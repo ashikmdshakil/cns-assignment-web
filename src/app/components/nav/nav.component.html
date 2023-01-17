@@ -9,6 +9,7 @@
         <!-- <li><a href="#">Page 2</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="isLogin"><a routerLink="/user/dashboard"><span></span>Hello {{user.name}}</a></li>
         <li><a routerLink="/user/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li *ngIf="!isLogin"><a routerLink="/user/login"><span class="glyphicon glyphicon-log-in"></span>LogIn</a></li>
         <li *ngIf="isLogin"><a routerLink="/user/login" (click)="logout()"><span class="glyphicon glyphicon-log-in"></span>LogOut</a></li>

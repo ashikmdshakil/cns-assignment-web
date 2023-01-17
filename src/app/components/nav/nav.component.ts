@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-nav',
@@ -10,6 +11,8 @@ export class NavComponent implements OnInit{
 
   isLogin: boolean = false;
   router: Router;
+  name: string = '';
+  user: User = new User();
 
   ngOnInit(): void {
     setInterval(()=>{
@@ -20,6 +23,7 @@ export class NavComponent implements OnInit{
         this.isLogin = true;
       }
     },1000)
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
   constructor(router: Router){
