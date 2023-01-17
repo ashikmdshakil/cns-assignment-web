@@ -67,4 +67,14 @@ export class UserService {
     )
   }
 
+  allUsers(): Observable<any> {
+    let token = localStorage.getItem("token")
+    const headers = new HttpHeaders({
+      authorization: 'Bearer ' + token
+    });
+    return this.httpClient.get('http://localhost:8080/private/user/list', { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
 }

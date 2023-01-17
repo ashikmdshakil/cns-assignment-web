@@ -67,6 +67,36 @@ export class ProjectService {
     );
   }
 
+  addEmployeeToProject(projectId: number, name: string): Observable<any> {
+    let token = localStorage.getItem("token")
+    const headers = new HttpHeaders({
+      authorization: 'Bearer ' + token
+    });
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("projectId", projectId.toString());
+   
+    return this.httpClient.post('http://localhost:8080/private/project/employee/add', formData, { responseType: 'text', headers: headers })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  removeEmployeeToProject(projectId: number, name: string): Observable<any> {
+    let token = localStorage.getItem("token")
+    const headers = new HttpHeaders({
+      authorization: 'Bearer ' + token
+    });
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("projectId", projectId.toString());
+   
+    return this.httpClient.post('http://localhost:8080/private/project/employee/delete', formData, { responseType: 'text', headers: headers })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getProjects(): Observable<any> {
     let token = localStorage.getItem("token")
     let headers = new HttpHeaders();

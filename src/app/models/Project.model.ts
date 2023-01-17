@@ -8,5 +8,5 @@ export class Project{
     startDateTime: Date = new Date();
     endDateTime: Date = new Date();
     owner: User = new User();
-    projectMembers: [] = [];
+    projectMembers: User[] = [];
 }
