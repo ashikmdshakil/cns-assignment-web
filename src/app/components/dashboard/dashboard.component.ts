@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit{
   projectService: ProjectService;
   router: Router;
   projects: Project[] = [];
+  selectedProject: Project = new Project();
 
 
 
@@ -27,6 +28,41 @@ export class DashboardComponent implements OnInit{
     this.projectService.getProjects().subscribe(result =>{
       this.projects = result;
     })
+  }
+
+  showDetails(id: number){
+    this.projects.forEach(element => {
+      if(element.id == id){
+        this.selectedProject = element;
+      }
+    });
+  }
+
+  updateProject(){
+    this.projectService.updateProject(this.selectedProject).subscribe(result =>{
+      if(result == "success"){
+        Swal.fire({
+          title: 'Success!',
+          text: 'You are successfully registered.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+        this.projectService.getProjects().subscribe(result =>{
+          this.projects = result;
+        })
+      }
+      else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
+      }
+    })
+  }
+
+  changeStatus(id: number){
+    this.selectedProject.status = id;
   }
 
 

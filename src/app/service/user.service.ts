@@ -28,6 +28,15 @@ export class UserService {
 
       }) 
     }
+    if (error.status === 403) {
+      Swal.fire({
+       icon: 'error',
+       title: 'Your are not authorized.',
+       showConfirmButton: false,
+       timer: 1800
+
+     }) 
+   }
     else {
       Swal.fire({
         icon: 'error',
@@ -52,7 +61,10 @@ export class UserService {
   }
 
   registerUser(user: User): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/public/registerUser', user, { 'responseType': 'text' });
+    return this.httpClient.post('http://localhost:8080/public/registerUser', user, { 'responseType': 'text' })
+    .pipe(
+      catchError(this.handleError)
+    )
   }
 
 }

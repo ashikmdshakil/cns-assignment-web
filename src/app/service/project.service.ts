@@ -24,6 +24,15 @@ export class ProjectService {
 
       }) 
     }
+    else if(error.status === 403) {
+      Swal.fire({
+       icon: 'error',
+       title: 'Your are not authorized.',
+       showConfirmButton: false,
+       timer: 1800
+
+     }) 
+   }
     else {
       Swal.fire({
         icon: 'error',
@@ -41,13 +50,30 @@ export class ProjectService {
     const headers = new HttpHeaders({
       authorization: 'Bearer ' + token
     });
-    return this.httpClient.post('http://localhost:8080/private/project/create', project, { responseType: 'text', headers: headers });
+    return this.httpClient.post('http://localhost:8080/private/project/create', project, { responseType: 'text', headers: headers })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateProject(project: Project): Observable<any> {
+    let token = localStorage.getItem("token")
+    const headers = new HttpHeaders({
+      authorization: 'Bearer ' + token
+    });
+    return this.httpClient.post('http://localhost:8080/private/project/update', project, { responseType: 'text', headers: headers })
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   getProjects(): Observable<any> {
     let token = localStorage.getItem("token")
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'Bearer '+token);
-    return this.httpClient.get('http://localhost:8080/private/project/owner', { 'headers': headers });
+    return this.httpClient.get('http://localhost:8080/private/project/owner', { 'headers': headers })
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 }
