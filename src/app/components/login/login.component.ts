@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit{
         this.user = result;
         localStorage.setItem('token',this.user.JWTToken);
         localStorage.setItem('user', JSON.stringify(this.user));
+        localStorage.setItem('isLogin', '1')
+        this.router.navigateByUrl("/user/dashboard")
     })
     }
   }

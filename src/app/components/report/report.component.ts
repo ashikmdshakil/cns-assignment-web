@@ -1,5 +1,6 @@
 import { ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { VirtualTimeScheduler } from 'rxjs';
 import { Project } from 'src/app/models/Project.model';
 import { ProjectService } from 'src/app/service/project.service';
@@ -20,21 +21,27 @@ export class ReportComponent implements OnInit{
   totalUsers: number = 0;
   totalProjects: number = 0;
   totalRunnings: number = 0;
+  router: Router;
 
-  constructor(projectService: ProjectService){
+  constructor(projectService: ProjectService, router: Router){
     this.projectService = projectService;
+    this.router = router;
   }
 
   ngOnInit(): void {
-    this.projectService.getAllProjects().subscribe(result =>{
-      this.projects = result;
-    })
-    this.projectService.getProjectOverview().subscribe(result =>{
-      this.totalUsers = result.users;
-      this.totalProjects = result.projects;
-      this.totalRunnings = result.runnings;
-    })
-
+    if(localStorage.getItem('isLogin') == null || localStorage.getItem('isLogin') == '0'){
+      this.router.navigateByUrl("/user/login");
+    }
+    else{
+      this.projectService.getAllProjects().subscribe(result =>{
+        this.projects = result;
+      })
+      this.projectService.getProjectOverview().subscribe(result =>{
+        this.totalUsers = result.users;
+        this.totalProjects = result.projects;
+        this.totalRunnings = result.runnings;
+      })
+    }
   }
 
   showDetails(id: number){

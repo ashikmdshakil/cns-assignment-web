@@ -8,10 +8,18 @@ import { Route, Router } from '@angular/router';
 })
 export class NavComponent implements OnInit{
 
+  isLogin: boolean = false;
   router: Router;
 
   ngOnInit(): void {
-    
+    setInterval(()=>{
+      if(localStorage.getItem('user') == null || localStorage.getItem('token') == null || localStorage.getItem('isLogin') == '0'){
+        this.isLogin = false;
+      }
+      else if( localStorage.getItem('isLogin') == '1'){
+        this.isLogin = true;
+      }
+    },1000)
   }
 
   constructor(router: Router){
@@ -25,6 +33,13 @@ export class NavComponent implements OnInit{
 
    signup(){
     this.router.navigateByUrl("/user/signup)");
+  }
+
+  logout(){
+    window.localStorage.clear();
+    localStorage.setItem('isLogin','0');
+    this.isLogin = false;
+    this.router.navigateByUrl("/user/login");
   }
 
 }

@@ -30,13 +30,17 @@ export class DashboardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.projectService.getProjects().subscribe(result =>{
-      this.projects = result;
-    })
-
-    this.userService.allUsers().subscribe(result =>{
-      this.users = result;
-    })
+    if(localStorage.getItem('isLogin') == null || localStorage.getItem('isLogin') == '0'){
+      this.router.navigateByUrl("/user/login");
+    }
+    else{
+      this.projectService.getProjects().subscribe(result =>{
+        this.projects = result;
+      })
+      this.userService.allUsers().subscribe(result =>{
+        this.users = result;
+      })
+    }
   }
 
   showDetails(id: number){
