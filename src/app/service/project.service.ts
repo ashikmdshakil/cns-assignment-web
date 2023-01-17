@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -120,4 +120,45 @@ export class ProjectService {
       catchError(this.handleError)
     );
   }
+
+  getAllProjects(): Observable<any> {
+    let token = localStorage.getItem("token")
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer '+token);
+    return this.httpClient.get('http://localhost:8080/private/project/all', { 'headers': headers })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  getAllProjectsByDate(start: Date, end: Date, status: number): Observable<any> {
+    let token = localStorage.getItem("token")
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer '+token);
+
+    let param = new HttpParams()
+      .set('startingDate', this.convertDigitIn(start.toString()))
+      .set('endTime', this.convertDigitIn(end.toString()))
+      .set('status', status.toString());
+
+    return this.httpClient.get('http://localhost:8080/private/project/search', { 'headers': headers, params: param })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getProjectsAsEmployee(): Observable<any> {
+    let token = localStorage.getItem("token")
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer '+token);
+    return this.httpClient.get('http://localhost:8080/private/project/employee', { 'headers': headers })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  convertDigitIn(str: string){
+    return str.split('/').reverse().join('/');
+ }
 }

@@ -2,47 +2,62 @@
     <div class="col-lg-5"></div>
     <div class="col-lg-2">
         <!-- Create new project -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create New Project</button>
+        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Create New Project</button>
     </div>
     <div class="col-lg-5"></div>
   </div>
 
 
-  <div class="row" style="margin-top: 50px;">
+  <div class="row" style="margin-top: 100px;">
     <div class="col-lg-1"></div>
     <div class="col-lg-10">
+      <div class="row">
+        <div class="col-lg-8"></div>
+        <div class="cl-lg-4">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" (click)="ownerList()" class="btn btn-primary">As Owner</button>
+            <button type="button" (click)="memberList()" class="btn btn-primary">As Member</button>
+          </div>
+        </div>
+      </div>
       <div class="container">
-        <h2>Projects you own.</h2>
-        <p>You are the owner of these following projects:</p>            
-        <table class="table table-hover">
+        <div *ngIf="isOwner">
+          <h2>Projects you own.</h2>
+          <p>You are the owner of these following projects:</p> 
+        </div>   
+        <div *ngIf="!isOwner">
+          <h2>Projects you are involved as a member.</h2>
+          <p>You are one of the project member of these following projects:</p> 
+        </div>        
+        <table class="table table-hover" style="margin-top: 25px;">
           <thead>
             <tr>
               <th>Name</th>
               <th>Intro</th>
-              <th>Starting Date</th>
+              <th>Start Date</th>
               <th>Dead Line</th>
               <th>Status</th>
               <th>Owner</th>
-              <th>Members</th>
-              <th>Details</th>
-              <th>Add Members</th>
-              <th>Delete</th>
+              <th *ngIf="isOwner">Members</th>
+              <th *ngIf="isOwner">Details</th>
+              <th *ngIf="isOwner">Add Members</th>
+              <th *ngIf="isOwner">Delete</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let project of projects">
               <td>{{project.name}}</td>
               <td>{{project.intro}}</td>
-              <td>{{project.startDateTime | date:'medium'}}</td>
-              <td>{{project.endDateTime | date:'medium'}}</td>
-              <td *ngIf="project.status==0">Pre</td>
-              <td *ngIf="project.status==1">Start</td>
-              <td *ngIf="project.status==3">End</td>
+              <td>{{project.startDateTime | date:'mediumDate'}}</td>
+              <td>{{project.endDateTime | date:'mediumDate'}}</td>
+              <td style="color: chocolate;" *ngIf="project.status==0">Pre</td>
+              <td style="color: green;" *ngIf="project.status==1">Start</td>
+              <td style="color: blue;" *ngIf="project.status==3">End</td>
               <td>{{project.owner.name}}</td>
-              <td><button type="button" (click)="showDetails(project.id)" class="btn btn-link" data-toggle="modal" data-target="#myMembers">{{project.projectMembers.length}}</button></td>
-              <td><button type="button" (click)="showDetails(project.id)" class="btn btn-link" data-toggle="modal" data-target="#myDetails">See Details/Update</button></td>
-              <td><button type="button" (click)="showDetails(project.id)" class="btn btn-link" data-toggle="modal" data-target="#allEmployees">Add Members</button></td>
-              <td><button type="button" (click)="showDetails(project.id)" class="btn btn-link" data-toggle="modal" data-target="#deleteProject">Delete</button></td>
+              <td *ngIf="isOwner"><button type="button" (click)="showDetails(project.id)" class="btn btn-link" data-toggle="modal" data-target="#myMembers">{{project.projectMembers.length}}</button></td>
+              <td *ngIf="isOwner"><button type="button" (click)="showDetails(project.id)" class="btn btn-link" data-toggle="modal" data-target="#myDetails">See Details/Update</button></td>
+              <td *ngIf="isOwner"><button type="button" (click)="showDetails(project.id)" class="btn btn-link" data-toggle="modal" data-target="#allEmployees">Add Members</button></td>
+              <td *ngIf="isOwner"><button type="button" (click)="showDetails(project.id)" class="btn btn-link" data-toggle="modal" data-target="#deleteProject">Delete</button></td>
             </tr>
           </tbody>
         </table>

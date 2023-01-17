@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit{
   projects: Project[] = [];
   users: User[] = [];
   selectedProject: Project = new Project();
+  isOwner: boolean = true;
 
 
 
@@ -181,6 +182,20 @@ export class DashboardComponent implements OnInit{
           text: 'Something went wrong!',
         })
       }
+    })
+  }
+
+  ownerList(){
+    this.projectService.getProjects().subscribe(result =>{
+      this.projects = result;
+      this.isOwner = true;
+    })
+  }
+
+  memberList(){
+    this.projectService.getProjectsAsEmployee().subscribe(result =>{
+      this.projects = result;
+      this.isOwner = false;
     })
   }
 
