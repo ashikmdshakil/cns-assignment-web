@@ -32,7 +32,6 @@ export class DashboardComponent implements OnInit{
   ngOnInit(): void {
     this.projectService.getProjects().subscribe(result =>{
       this.projects = result;
-      console.log(result);
     })
 
     this.userService.allUsers().subscribe(result =>{

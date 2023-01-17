@@ -1,5 +1,6 @@
 import { ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { VirtualTimeScheduler } from 'rxjs';
 import { Project } from 'src/app/models/Project.model';
 import { ProjectService } from 'src/app/service/project.service';
 
@@ -16,6 +17,9 @@ export class ReportComponent implements OnInit{
   startTime: Date = new Date();
   endTime: Date = new Date();
   status: number = 0;
+  totalUsers: number = 0;
+  totalProjects: number = 0;
+  totalRunnings: number = 0;
 
   constructor(projectService: ProjectService){
     this.projectService = projectService;
@@ -24,7 +28,13 @@ export class ReportComponent implements OnInit{
   ngOnInit(): void {
     this.projectService.getAllProjects().subscribe(result =>{
       this.projects = result;
-    })    
+    })
+    this.projectService.getProjectOverview().subscribe(result =>{
+      this.totalUsers = result.users;
+      this.totalProjects = result.projects;
+      this.totalRunnings = result.runnings;
+    })
+
   }
 
   showDetails(id: number){

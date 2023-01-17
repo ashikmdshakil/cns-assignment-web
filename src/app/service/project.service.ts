@@ -158,6 +158,17 @@ export class ProjectService {
     );
   }
 
+  getProjectOverview(): Observable<any> {
+    let token = localStorage.getItem("token")
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer '+token);
+    return this.httpClient.get('http://localhost:8080/private/project/overview', { 'headers': headers })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
   convertDigitIn(str: string){
     return str.split('/').reverse().join('/');
  }
