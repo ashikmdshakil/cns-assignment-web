@@ -18,6 +18,7 @@ export class ReportComponent implements OnInit{
   startTime: Date = new Date();
   endTime: Date = new Date();
   status: number = 0;
+  statusEn: string = "";
   totalUsers: number = 0;
   totalProjects: number = 0;
   totalRunnings: number = 0;
@@ -54,12 +55,22 @@ export class ReportComponent implements OnInit{
 
   search(){
     this.projectService.getAllProjectsByDate(this.startTime, this.endTime, this.status).subscribe(result =>{
+      console.log(result);
       this.projects = result;
     })
   }
 
   setStatus(number: number){
     this.status = number;
+    if(this.status == 0){
+      this.statusEn = "Pre";
+    }
+    else if(this.status == 1){
+      this.statusEn = "Start";
+    }
+    else if(this.status == 3){
+      this.statusEn = "End";
+    }
   }
 
 
